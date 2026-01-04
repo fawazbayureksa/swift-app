@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing:20) {
-            Text("\(count)") // call variable count on text
+            Text("\(count)").font(.largeTitle) // call variable count on text
             HStack(spacing: 20) {
                 Button(action: {count-=1}){
                     Text("-")
