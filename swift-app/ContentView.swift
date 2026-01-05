@@ -7,8 +7,10 @@
 
 import SwiftUI
 import PhotosUI
-import UIKit
 #if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
 #endif
 
 struct ContentView: View {
@@ -76,7 +78,7 @@ struct ContentView: View {
                                 .cornerRadius(12)
                         }
                     }
-                    .tabViewStyle(.page)
+//                    .tabViewStyle(.page)
                     .frame(height: 300)
                 }
                 
@@ -96,9 +98,16 @@ struct ContentView: View {
                         Task {
                             var loadedImages: [Image] = []
                             for item in selectedItems {
-                                if let data = try? await item.loadTransferable(type: Data.self),
-                                   let uiImage = UIImage(data: data) {
-                                    loadedImages.append(Image(uiImage: uiImage))
+                                if let data = try? await item.loadTransferable(type: Data.self) {
+                                    #if canImport(UIKit)
+                                    if let uiImage = UIImage(data: data) {
+                                        loadedImages.append(Image(uiImage: uiImage))
+                                    }
+                                    #elseif canImport(AppKit)
+                                    if let nsImage = NSImage(data: data) {
+                                        loadedImages.append(Image(nsImage: nsImage))
+                                    }
+                                    #endif
                                 }
                             }
                             selectedImages = loadedImages
