@@ -7,6 +7,9 @@
 
 import SwiftUI
 import PhotosUI
+import UIKit
+#if canImport(UIKit)
+#endif
 
 struct ContentView: View {
     @State private var count: Int = 0
