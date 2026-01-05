@@ -16,13 +16,20 @@ struct ContentView: View {
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var selectedImages: [Image] = []
     
+    func sayHello() {
+        print("Hello Swift")
+    }
+    func counterView() -> some View {
+        Text("Counter \(count)")
+            .font(.largeTitle)
+            .fontWeight(.bold)
+    }
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 // MARK: - Counter Section
-                Text("\(count)")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                counterView()
                 
                 HStack(spacing: 20) {
                     Button(action: { count -= 1 }) {
